@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-char arr[1000][1000];
-bool visited[1000][1000];
+char arr[20][20];
+bool visited[20][20];
 int r, c;
 
 bool validIndex(int i, int j)
@@ -20,28 +20,23 @@ bool validIndex(int i, int j)
 }
 
 vector<pair<int, int>> v = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
-string dfs(int ri, int ci)
+
+void dfs(int ri, int ci) // Added return type 'void'
 {
-    if (arr[ri][ci] == '#')
-        return "NO";
-    if (arr[ri][ci] == 'B')
-        return "YES";
+    cout << ri << " " << ci << "--> " << arr[ri][ci] << endl;
     visited[ri][ci] = true;
-    string str;
     for (int i = 0; i < 4; i++)
     {
         int cc = ri + v[i].first;
         int jj = ci + v[i].second;
-
-        if (validIndex(cc, jj) && !visited[cc][jj])
+        if (validIndex(cc, jj) && visited[cc][jj] == false)
         {
-            str = dfs(cc, jj);
-            if (str == "YES")
-                return "YES"; 
+
+            dfs(cc, jj);
         }
     }
-    return "NO"; 
 }
+
 int main()
 {
     cin >> r >> c;
@@ -60,15 +55,6 @@ int main()
     // Removed memset for arr, it's not needed here
 
     memset(visited, false, sizeof(visited));
-
-    for (int i = 0; i < r; i++)
-    {
-        for (int j = 0; j < c; j++) // Corrected the loop condition
-        {
-            if (arr[i][j] == 'A')
-                cout << dfs(i, j) << endl;
-        }
-    }
-
+    dfs(ri, ci);
     return 0;
 }
