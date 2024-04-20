@@ -25,6 +25,6 @@ int main()
     }
     
     if(mat[3][4]==1)cout<< "connection ache"<<endl;
-    cout <<"❤ hello Nila ❤";
+  
     return 0;
 }
