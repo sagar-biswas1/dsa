@@ -20,54 +20,56 @@ bool validIndex(int i, int j)
 }
 
 vector<pair<int, int>> v = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
-string dfs(int ri, int ci)
+
+int dfs(int ri, int ci)
 {
     if (arr[ri][ci] == '#')
-        return "NO";
-    if (arr[ri][ci] == 'B')
-        return "YES";
+        return 0;
     visited[ri][ci] = true;
-    string str;
+    int cnt = 1;
     for (int i = 0; i < 4; i++)
     {
         int cc = ri + v[i].first;
         int jj = ci + v[i].second;
-
         if (validIndex(cc, jj) && !visited[cc][jj])
         {
-            str = dfs(cc, jj);
-            if (str == "YES")
-                return "YES"; 
+            cnt += dfs(cc, jj);
         }
     }
-    return "NO"; 
+    return cnt;
 }
+
 int main()
 {
     cin >> r >> c;
 
     for (int i = 0; i < r; i++)
     {
-        for (int j = 0; j < c; j++) // Corrected the loop condition
+        for (int j = 0; j < c; j++) 
         {
             cin >> arr[i][j];
         }
     }
 
-    int ri, ci;
-    cin >> ri >> ci;
-
-    // Removed memset for arr, it's not needed here
-
     memset(visited, false, sizeof(visited));
 
+    vector<int> roomCount;
     for (int i = 0; i < r; i++)
     {
-        for (int j = 0; j < c; j++) // Corrected the loop condition
+        for (int j = 0; j < c; j++) 
         {
-            if (arr[i][j] == 'A')
-                cout << dfs(i, j) << endl;
+            if (arr[i][j] == '.' && !visited[i][j])
+            {
+                roomCount.push_back(dfs(i, j));
+            }
         }
+    }
+
+    sort(roomCount.begin(), roomCount.end());
+
+    for (int i = 0; i < roomCount.size(); i++)
+    {
+        cout << roomCount[i] << " ";
     }
 
     return 0;
