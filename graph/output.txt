@@ -1,1 +1,12 @@
+0
+parents[parent] -0 -1child 1
+parents[parent] -0 -1child 2
+1
+parents[parent] -1 0child 0
+parents[parent] -1 0child 2
+hey
+2
+parents[parent] -2 0child 0
+parents[parent] -2 0child 1
+hey
 cycle 1

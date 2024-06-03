@@ -8,6 +8,12 @@ int parents[N];
 bool result = false;
 void dfs(int parent)
 {
+//     0
+// 1      2
+// 0 - 1,2
+// 1-0,2
+// 2- 0,1
+// [, 0, 0]
     visited[parent] = true;
 
     for (auto child : adj_list[parent])

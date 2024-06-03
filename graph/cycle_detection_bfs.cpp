@@ -20,9 +20,10 @@ void bfs(int src)
         for (int i = 0; i < adj_list[parent].size(); i++)
         {
             int child = adj_list[parent][i];
-
+            cout << "parents[parent] -" << parent << " " << parents[parent] <<"child "<<child<< endl;
             if (visited[child] && parents[parent] != child)
             {
+                cout<<"hey"<<endl;
                 result = true;
             }
             if (!visited[child])
@@ -59,6 +60,6 @@ int main()
         }
     }
 
-cout<<"cycle " << result;
+    cout << "cycle " << result;
     return 0;
 }
